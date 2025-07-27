@@ -1,0 +1,6 @@
+This is a placeholder file. Replace with actual image files for your portfolio.
+
+Suggested images to create:
+- graphic-design-1.jpg through graphic-design-6.jpg (for graphic design projects)
+- website-1.jpg through website-5.jpg (for website projects)
+- video-thumb-1.jpg through video-thumb-5.jpg (for video thumbnails)
