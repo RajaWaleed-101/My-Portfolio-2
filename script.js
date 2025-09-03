@@ -79,8 +79,8 @@ const websiteProjects = [
         title: 'Portfolio Website',
         description: 'Creative portfolio website for a programmer with gallery features and contact form.',
         image: 'images/port-website.png',
-        link: 'https://rajawaleed-101.github.io/My-Portfolio/',
-        githubLink: 'https://github.com/RajaWaleed-101/My-Portfolio',
+        link: 'https://rajawaleed-101.github.io/My-Portfolio-2/',
+        githubLink: 'https://github.com/RajaWaleed-101/My-Portfolio-2',
         type: 'image'
     },
     {
@@ -98,7 +98,7 @@ const websiteProjects = [
         description: 'High-converting landing page for a product launch with animations and call-to-action elements.',
         image: 'images/event-website.png',
         link: 'https://rajawaleed-101.github.io/EventBooking-Website/',
-        githubLink: 'https://github.com/RajaWaleed-101/Landing-Page',
+        githubLink: 'https://github.com/RajaWaleed-101/EventBooking-Website',
         type: 'image'
     }
 ];
