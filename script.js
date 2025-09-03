@@ -109,39 +109,39 @@ const videoProjects = [
         title: 'Promotional Video',
         description: 'A 30-second promotional video for a tech product with motion graphics and sound design.',
         video: 'video/pro.mp4',
-        thumbnail: 'images/video-thumb-1.jpg',
+        thumbnail: 'images/pro.png',
         type: 'video'
     },
     {
         id: 'vid2',
         title: 'Corporate Video',
         description: 'Corporate overview video showcasing company culture, values, and services.',
-        video: 'videos/video-2.mp4',
-        thumbnail: 'images/video-thumb-2.jpg',
+        video: 'video/corporate.mp4',
+        thumbnail: 'images/cor.png',
         type: 'video'
     },
     {
         id: 'vid3',
         title: 'Event Highlights',
         description: 'Highlight reel from a major conference with interviews and key moments.',
-        video: 'videos/video-3.mp4',
-        thumbnail: 'images/video-thumb-3.jpg',
+        video: 'video/event.mp4',
+        thumbnail: 'images/event.png',
         type: 'video'
     },
     {
         id: 'vid4',
         title: 'Social Media Ad',
         description: 'Short-form video content optimized for social media advertising.',
-        video: 'videos/video-4.mp4',
-        thumbnail: 'images/video-thumb-4.jpg',
+        video: 'video/social.mp4',
+        thumbnail: 'images/social.png',
         type: 'video'
     },
     {
         id: 'vid5',
         title: 'Motion Graphics',
         description: 'Custom motion graphics and animations for digital marketing campaign.',
-        video: 'videos/video-5.mp4',
-        thumbnail: 'images/video-thumb-5.jpg',
+        video: 'video/motion.mp4',
+        thumbnail: 'images/motion.png',
         type: 'video'
     }
 ];
