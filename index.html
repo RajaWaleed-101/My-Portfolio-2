@@ -8,6 +8,35 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  // Initialize EmailJS
+  (function(){
+      emailjs.init("Gt9N5thvVFV5jl2mI"); // 🔹 Replace with your Public Key from EmailJS Dashboard
+  })();
+
+  // Handle form submission
+  document.getElementById("contactForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    emailjs.send("service_e6e68ap", "template_czji09g", {
+      from_name: document.getElementById("name").value,
+      from_email: document.getElementById("email").value,
+      subject: document.getElementById("subject").value,
+      message: document.getElementById("message").value
+    }).then(
+      function(response) {
+        alert("✅ Message sent successfully!");
+        document.getElementById("contactForm").reset(); // Clear form after success
+      },
+      function(error) {
+        alert("❌ Failed to send message. Please try again.");
+        console.error("Error:", error);
+      }
+    );
+  });
+</script>
+
 </head>
 <body>
     <!-- Navigation -->
