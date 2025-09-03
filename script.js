@@ -58,42 +58,47 @@ const graphicDesignProjects = [
 const websiteProjects = [
     {
         id: 'web1',
-        title: 'E-commerce Website',
-        description: 'A fully responsive e-commerce website with product catalog, shopping cart, and secure checkout.',
-        image: 'images/website-1.jpg',
-        link: 'https://example.com/ecommerce',
+        title: 'Savoria Restaurant Website',
+        description: 'A fully responsive restaurant website with menu display, reservation system, and customer reviews.',
+        image: 'images/Res-website.png',
+        link: 'https://rajawaleed-101.github.io/Savoria-Restaurant-Website/',
+        githubLink: 'https://github.com/RajaWaleed-101/Savoria-Restaurant-Website',
         type: 'image'
     },
     {
         id: 'web2',
-        title: 'Corporate Website',
-        description: 'Modern corporate website with custom animations, interactive elements, and content management system.',
-        image: 'images/website-2.jpg',
-        link: 'https://example.com/corporate',
+        title: 'Gym Website',
+        description: 'Modern gym website with custom animations, interactive elements, and content management system.',
+        image: 'images/gym-website.png',
+        link: 'https://rajawaleed-101.github.io/Gym-website/',
+        githubLink: 'https://github.com/RajaWaleed-101/Gym-website',
         type: 'image'
-    },
+    },      
     {
         id: 'web3',
         title: 'Portfolio Website',
-        description: 'Creative portfolio website for a photographer with gallery features and contact form.',
-        image: 'images/website-3.jpg',
-        link: 'https://example.com/portfolio',
+        description: 'Creative portfolio website for a programmer with gallery features and contact form.',
+        image: 'images/port-website.png',
+        link: 'https://rajawaleed-101.github.io/My-Portfolio/',
+        githubLink: 'https://github.com/RajaWaleed-101/My-Portfolio',
         type: 'image'
     },
     {
         id: 'web4',
-        title: 'Blog Website',
+        title: 'Travel Website',
         description: 'Personal blog website with custom theme, comment system, and social media integration.',
-        image: 'images/website-4.jpg',
-        link: 'https://example.com/blog',
+        image: 'images/travel-website.png',
+        link: 'https://rajawaleed-101.github.io/GlobalQuest-Travel-Website/',
+        githubLink: 'https://github.com/RajaWaleed-101/GlobalQuest-Travel-Website',
         type: 'image'
     },
     {
         id: 'web5',
-        title: 'Landing Page',
+        title: 'Event Website',
         description: 'High-converting landing page for a product launch with animations and call-to-action elements.',
-        image: 'images/website-5.jpg',
-        link: 'https://example.com/landing',
+        image: 'images/event-website.png',
+        link: 'https://rajawaleed-101.github.io/EventBooking-Website/',
+        githubLink: 'https://github.com/RajaWaleed-101/Landing-Page',
         type: 'image'
     }
 ];
@@ -305,6 +310,9 @@ function createGalleryItems() {
     const graphicDesignGallery = document.querySelector('.graphic-design-gallery');
     const websitesGallery = document.querySelector('.websites-gallery');
     const videoGallery = document.querySelector('.video-gallery');
+    
+    // Setup scroll arrows functionality
+    setupScrollArrows();
 
     // Create graphic design gallery items
     graphicDesignProjects.forEach(project => {
@@ -313,17 +321,41 @@ function createGalleryItems() {
         galleryItem.dataset.id = project.id;
         galleryItem.dataset.type = project.type;
         
-        galleryItem.innerHTML = `
-            <img src="${project.image}" alt="${project.title}">
-            <div class="overlay">
-                <h3>${project.title}</h3>
-                <p>Click to view details</p>
+        // Create image with lazy loading
+        const img = document.createElement('img');
+        img.alt = project.title;
+        img.loading = 'lazy'; // Enable native lazy loading
+        img.setAttribute('data-src', project.image); // Store image path for lazy loading
+        
+        // Set a placeholder or low-quality image initially
+        img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" preserveAspectRatio="none"%3E%3Crect width="300" height="250" fill="%23333333"%3E%3C/rect%3E%3C/svg%3E';
+        
+        galleryItem.appendChild(img);
+        
+        // Add overlay with title and button
+        const overlay = document.createElement('div');
+        overlay.className = 'overlay';
+        overlay.innerHTML = `
+            <h3>${project.title}</h3>
+            <div class="project-links">
+                <button class="view-details-btn">View Details</button>
             </div>
         `;
         
-        galleryItem.addEventListener('click', () => openModal(project));
+        galleryItem.appendChild(overlay);
+        
+        // Add click event to the view details button only
+        const viewDetailsBtn = galleryItem.querySelector('.view-details-btn');
+        viewDetailsBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent event bubbling
+            openModal(project);
+        });
+        
         graphicDesignGallery.appendChild(galleryItem);
     });
+    
+    // Initialize lazy loading for the first section
+    lazyLoadImages(document.querySelector('.graphic-design-gallery'));
 
     // Create websites gallery items
     websiteProjects.forEach(project => {
@@ -332,17 +364,41 @@ function createGalleryItems() {
         galleryItem.dataset.id = project.id;
         galleryItem.dataset.type = project.type;
         
-        galleryItem.innerHTML = `
-            <img src="${project.image}" alt="${project.title}">
-            <div class="overlay">
-                <h3>${project.title}</h3>
-                <p>Click to view details</p>
+        // Create image with lazy loading
+        const img = document.createElement('img');
+        img.alt = project.title;
+        img.loading = 'lazy'; // Enable native lazy loading
+        img.setAttribute('data-src', project.image); // Store image path for lazy loading
+        
+        // Set a placeholder or low-quality image initially
+        img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" preserveAspectRatio="none"%3E%3Crect width="300" height="250" fill="%23333333"%3E%3C/rect%3E%3C/svg%3E';
+        
+        galleryItem.appendChild(img);
+        
+        // Add overlay with title and button
+        const overlay = document.createElement('div');
+        overlay.className = 'overlay';
+        overlay.innerHTML = `
+            <h3>${project.title}</h3>
+            <div class="project-links">
+                <button class="view-details-btn">View Details</button>
             </div>
         `;
         
-        galleryItem.addEventListener('click', () => openModal(project));
+        galleryItem.appendChild(overlay);
+        
+        // Add click event to the view details button only
+        const viewDetailsBtn = galleryItem.querySelector('.view-details-btn');
+        viewDetailsBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent event bubbling
+            openModal(project);
+        });
+        
         websitesGallery.appendChild(galleryItem);
     });
+    
+    // Initialize lazy loading for websites section
+    lazyLoadImages(websitesGallery);
 
     // Create video gallery items
     videoProjects.forEach(project => {
@@ -351,38 +407,167 @@ function createGalleryItems() {
         galleryItem.dataset.id = project.id;
         galleryItem.dataset.type = project.type;
         
-        galleryItem.innerHTML = `
-            <img src="${project.thumbnail}" alt="${project.title}">
-            <div class="overlay">
-                <h3>${project.title}</h3>
-                <p>Click to play video</p>
+        // Create image with lazy loading
+        const img = document.createElement('img');
+        img.alt = project.title;
+        img.loading = 'lazy'; // Enable native lazy loading
+        img.setAttribute('data-src', project.thumbnail); // Store image path for lazy loading
+        
+        // Set a placeholder or low-quality image initially
+        img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" preserveAspectRatio="none"%3E%3Crect width="300" height="250" fill="%23333333"%3E%3C/rect%3E%3C/svg%3E';
+        
+        galleryItem.appendChild(img);
+        
+        // Add overlay with title and button
+        const overlay = document.createElement('div');
+        overlay.className = 'overlay';
+        overlay.innerHTML = `
+            <h3>${project.title}</h3>
+            <div class="project-links">
+                <button class="view-details-btn">View Video</button>
             </div>
         `;
         
-        galleryItem.addEventListener('click', () => openModal(project));
+        galleryItem.appendChild(overlay);
+        
+        // Add click event to the view details button only
+        const viewDetailsBtn = galleryItem.querySelector('.view-details-btn');
+        viewDetailsBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent event bubbling
+            openModal(project);
+        });
+        
         videoGallery.appendChild(galleryItem);
+    });
+    
+    // Initialize lazy loading for videos section
+    lazyLoadImages(videoGallery);
+}
+
+// Lazy loading functions
+function lazyLoadImages(container) {
+    const images = container.querySelectorAll('img[data-src]');
+    
+    // Create an intersection observer
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.getAttribute('data-src');
+                img.onload = () => {
+                    img.removeAttribute('data-src');
+                };
+                observer.unobserve(img);
+            }
+        });
+    }, { rootMargin: '100px' });
+    
+    // Observe each image
+    images.forEach(img => {
+        observer.observe(img);
+    });
+}
+
+function lazyLoadVideos(container) {
+    const videos = container.querySelectorAll('video[data-src]');
+    
+    // Create an intersection observer
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const video = entry.target;
+                video.src = video.getAttribute('data-src');
+                video.load();
+                video.removeAttribute('data-src');
+                observer.unobserve(video);
+            }
+        });
+    }, { rootMargin: '100px' });
+    
+    // Observe each video
+    videos.forEach(video => {
+        observer.observe(video);
     });
 }
 
 // Open modal with project details
 function openModal(project) {
-    if (project.type === 'video') {
-        modalImage.style.display = 'none';
-        modalVideo.style.display = 'block';
-        modalVideo.src = project.video;
-        modalVideo.load();
-        modalVideo.play();
-    } else {
-        modalImage.style.display = 'block';
-        modalVideo.style.display = 'none';
-        modalImage.src = project.image;
-    }
+    // Show loading state
+    modal.classList.add('loading');
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
     
+    // Set basic content immediately
     modalTitle.textContent = project.title;
     modalDescription.textContent = project.description;
     
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
+    // Use setTimeout to defer heavy operations
+    setTimeout(() => {
+        if (project.type === 'video') {
+            modalImage.style.display = 'none';
+            modalVideo.style.display = 'block';
+            modalVideo.src = project.video;
+            modalVideo.load();
+            // Only play after loaded
+            modalVideo.onloadeddata = () => {
+                modalVideo.play();
+                modal.classList.remove('loading');
+            };
+            // Fallback if onloadeddata doesn't trigger
+            setTimeout(() => modal.classList.remove('loading'), 500);
+        } else {
+            modalVideo.style.display = 'none';
+            modalImage.style.display = 'block';
+            
+            // Preload image
+            const img = new Image();
+            img.onload = () => {
+                modalImage.src = project.image;
+                modal.classList.remove('loading');
+            };
+            img.onerror = () => {
+                modal.classList.remove('loading');
+            };
+            img.src = project.image;
+            
+            // Fallback if image loading takes too long
+            setTimeout(() => {
+                modalImage.src = project.image;
+                modal.classList.remove('loading');
+            }, 500);
+        }
+        
+        // Add project links for website projects
+        const modalLinks = document.getElementById('modalLinks');
+        if (modalLinks) {
+            if (project.id.startsWith('web')) {
+                // Create links container if it doesn't exist
+                modalLinks.innerHTML = '';
+                
+                // Add live preview link if available
+                if (project.link) {
+                    const liveLink = document.createElement('a');
+                    liveLink.href = project.link;
+                    liveLink.target = '_blank';
+                    liveLink.classList.add('project-link', 'live-link');
+                    liveLink.innerHTML = '<i class="fas fa-external-link-alt"></i> Live Preview';
+                    modalLinks.appendChild(liveLink);
+                }
+                
+                // Add GitHub link - use githubLink property if available, otherwise use default
+                const githubLink = document.createElement('a');
+                githubLink.href = project.githubLink || 'https://github.com/RajaWaleed-101';
+                githubLink.target = '_blank';
+                githubLink.classList.add('project-link', 'github-link');
+                githubLink.innerHTML = '<i class="fab fa-github"></i> GitHub';
+                modalLinks.appendChild(githubLink);
+                
+                modalLinks.style.display = 'flex';
+            } else {
+                modalLinks.style.display = 'none';
+            }
+        }
+    }, 10); // Small delay to allow the modal to render first
 }
 
 // Close modal
@@ -636,6 +821,119 @@ function applySkillColors() {
     });
 }
 
+// Setup scroll arrows functionality
+function setupScrollArrows() {
+    // Force all arrows to be visible initially
+    const allArrows = document.querySelectorAll('.scroll-arrow');
+    allArrows.forEach(arrow => {
+        arrow.style.opacity = '1';
+        arrow.style.pointerEvents = 'auto';
+        arrow.style.display = 'flex';
+    });
+    
+    const galleryWrappers = document.querySelectorAll('.project-gallery-wrapper');
+    
+    galleryWrappers.forEach(wrapper => {
+        const container = wrapper.querySelector('.horizontal-scroll-container');
+        const scrollContent = wrapper.querySelector('.scroll-content');
+        const arrows = wrapper.querySelectorAll('.scroll-arrow');
+        const leftArrow = wrapper.querySelector('.scroll-arrow.left');
+        const rightArrow = wrapper.querySelector('.scroll-arrow.right');
+        
+        // Make sure arrows are visible
+        if (leftArrow) {
+            leftArrow.style.opacity = '1';
+            leftArrow.style.pointerEvents = 'auto';
+            leftArrow.style.display = 'flex';
+        }
+        
+        if (rightArrow) {
+            rightArrow.style.opacity = '1';
+            rightArrow.style.pointerEvents = 'auto';
+            rightArrow.style.display = 'flex';
+        }
+        
+        // Remove any cloned items from previous implementation
+        if (scrollContent) {
+            Array.from(scrollContent.children).forEach(child => {
+                if (child.hasAttribute('aria-hidden')) {
+                    scrollContent.removeChild(child);
+                }
+            });
+        }
+        
+        // Initial arrow visibility check
+        updateArrowVisibility();
+        
+        // Handle arrow clicks
+        arrows.forEach(arrow => {
+            arrow.addEventListener('click', (e) => {
+                e.stopPropagation();
+                console.log('Arrow clicked:', arrow.getAttribute('data-direction'));
+                const direction = arrow.getAttribute('data-direction');
+                
+                // Calculate scroll amount based on container width for consistency
+                // Use at least 300px or 80% of container width, whichever is larger
+                const scrollAmount = Math.max(300, container.clientWidth * 0.8);
+                
+                // Calculate new scroll position
+                const currentScrollLeft = container.scrollLeft;
+                const newScrollLeft = direction === 'left' ? 
+                    currentScrollLeft - scrollAmount : 
+                    currentScrollLeft + scrollAmount;
+                
+                // Smooth scroll to new position
+                container.scrollTo({
+                    left: newScrollLeft,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Update arrow visibility on scroll
+        container.addEventListener('scroll', updateArrowVisibility);
+        
+        // Update arrow visibility on window resize
+        window.addEventListener('resize', () => {
+            // Small delay to ensure container dimensions are updated
+            setTimeout(updateArrowVisibility, 100);
+        });
+        
+        // Function to update arrow visibility
+        function updateArrowVisibility() {
+            // Only apply visibility logic if we have enough content to scroll
+            const hasScrollableContent = container.scrollWidth > container.clientWidth;
+            
+            // Always show arrows if we have scrollable content
+            if (hasScrollableContent) {
+                // Hide left arrow if at the beginning
+                if (container.scrollLeft <= 10) {
+                    leftArrow.style.opacity = '0.3';
+                    leftArrow.style.pointerEvents = 'none';
+                } else {
+                    leftArrow.style.opacity = '1';
+                    leftArrow.style.pointerEvents = 'auto';
+                }
+                
+                // Hide right arrow if at the end
+                const maxScrollLeft = container.scrollWidth - container.clientWidth - 10;
+                if (container.scrollLeft >= maxScrollLeft) {
+                    rightArrow.style.opacity = '0.3';
+                    rightArrow.style.pointerEvents = 'none';
+                } else {
+                    rightArrow.style.opacity = '1';
+                    rightArrow.style.pointerEvents = 'auto';
+                }
+            } else {
+                // No scrollable content, show arrows with reduced opacity
+                leftArrow.style.opacity = '0.3';
+                rightArrow.style.opacity = '0.3';
+            }
+        }
+    });
+}
+
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Start loading animation
@@ -649,6 +947,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Setup project categories
     setupProjectCategories();
+    
+    // Setup scroll arrows
+    setupScrollArrows();
     
     // Setup skill animations
     setupSkillAnimations();
