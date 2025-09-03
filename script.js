@@ -108,7 +108,7 @@ const videoProjects = [
         id: 'vid1',
         title: 'Promotional Video',
         description: 'A 30-second promotional video for a tech product with motion graphics and sound design.',
-        video: 'videos/video-1.mp4',
+        video: 'video/pro.mp4',
         thumbnail: 'images/video-thumb-1.jpg',
         type: 'video'
     },
