@@ -623,34 +623,44 @@ function smoothScroll() {
     });
 }
 
-// Form submission
-function handleFormSubmission() {
-    const contactForm = document.getElementById('contactForm');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value
-            };
-            
-            // Here you would typically send the data to a server
-            // For demo purposes, we'll just log it and show a success message
-            console.log('Form submitted:', formData);
-            
-            // Show success message
-            alert('Thank you for your message! I will get back to you soon.');
-            
-            // Reset form
-            contactForm.reset();
+// Form submission with EmailJS
+(function () {
+  emailjs.init({
+    publicKey: "7Kvsoh_8UXAwj7hPj", // from EmailJS → Account → API Keys
+  });
+})();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const contactForm = document.getElementById("contactForm");
+
+  if (contactForm) {
+    contactForm.onsubmit = function (e) {
+      e.preventDefault();
+
+      const templateParams = {
+        from_name: document.getElementById("name").value,
+        from_email: document.getElementById("email").value,
+        subject: document.getElementById("subject").value,
+        message: document.getElementById("message").value,
+      };
+
+      emailjs
+        .send("service_e6e68ap", "template_czji09g", templateParams)
+        .then((response) => {
+          console.log("✅ SUCCESS!", response.status, response.text);
+          alert("✅ Message sent successfully!");
+          contactForm.reset();
+        })
+        .catch((error) => {
+          console.error("❌ FAILED...", error);
+          alert("❌ Failed to send message: " + JSON.stringify(error));
         });
-    }
-}
+    };
+  }
+});
+
+
+
 
 // Parallax scrolling effect
 function parallaxEffect() {
